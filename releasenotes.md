@@ -58,6 +58,7 @@
 - Member access on a struct returned by the assignment expression, cause crash #2947
 - Trying to slice an indexable type leads to misleading error message #2958
 - Warn on use of visibility modifiers on methods. #2962
+- Compiler crash using `??` with a `void?` macro #2973
 
 ## 0.7.9 Change list
 
