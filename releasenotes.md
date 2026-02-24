@@ -3,6 +3,7 @@
 ## 0.7.10 Change list
 
 ### Changes / improvements
+- C3 is now using its own LLVM libraries when building releases.
 - Method resolution and `$defined` now works together well unless definitions are out of order for real.
 - Improve error message when using functions as values #2856
 - Improve support for Android with Termux.
