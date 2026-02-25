@@ -2352,7 +2352,7 @@ unsigned type_get_introspection_kind(TypeKind kind)
 		case TYPE_ENUM:
 			return INTROSPECT_TYPE_ENUM;
 		case TYPE_CONSTDEF:
-			return INTROSPECT_TYPE_CONST_ENUM;
+			return INTROSPECT_TYPE_CONSTDEF;
 		case TYPE_FUNC_PTR:
 			return INTROSPECT_TYPE_FUNC;
 		case TYPE_STRUCT:

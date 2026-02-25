@@ -3091,7 +3091,7 @@ INLINE const char *type_invalid_storage_type_name(Type *type)
 
 INLINE Type *enum_inner_type(Type *enum_type)
 {
-	assert(enum_type->type_kind == TYPE_ENUM || enum_type->type_kind == TYPE_CONST_ENUM);
+	assert(enum_type->type_kind == TYPE_ENUM || enum_type->type_kind == TYPE_CONSTDEF);
 	return enum_type->decl->enums.type_info->type;
 }
 
