@@ -2870,7 +2870,7 @@ static bool parse_enum_values(ParseContext *c, Decl*** values_ref, Visibility vi
 			if (!is_constdef && deprecate_warn)
 			{
 				deprecate_warn = false;
-				print_deprecation_at(c->prev_span, "Use {} declaration of associated values instead.");
+				PRINT_DEPRECATED_AT(c->prev_span, "Use {} declaration of associated values instead.");
 			}
 			if (is_single_value || !tok_is(c, TOKEN_LBRACE))
 			{
@@ -2990,7 +2990,7 @@ static inline Decl *parse_enum_declaration(ParseContext *c)
 			is_constdef = try_consume(c, TOKEN_CONST);
 			if (is_constdef)
 			{
-				print_deprecation_at(c->prev_span, "Declare constdefs using 'constdef' instead.");
+				PRINT_DEPRECATED_AT(c->prev_span, "Declare constdefs using 'constdef' instead.");
 			}
 		}
 		if (!tok_is(c, TOKEN_LPAREN) && !tok_is(c, TOKEN_LBRACE))
