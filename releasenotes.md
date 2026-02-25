@@ -23,6 +23,7 @@
 - Support deprecating enum values.
 - Improve error when trying to use an extern const as a compile time constant. #2969
 - `vendor-fetch` command now lists all available packages by default. #2976
+- Typekind enums are changed CONST_ENUM -> CONSTDEF, DISTINCT -> TYPEDEF.
 
 ### Stdlib changes
 - Summarize sort macros as generic function wrappers to reduce the amount of generated code. #2831

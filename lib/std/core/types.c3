@@ -97,8 +97,8 @@ macro bool is_subtype_of($Type, $OtherType)
 macro bool is_numerical($Type)
 {
 	$switch $Type.kindof:
-		$case DISTINCT:
-		$case CONST_ENUM:
+		$case TYPEDEF:
+		$case CONSTDEF:
 			return is_numerical($Type.inner);
 		$case SIGNED_INT:
 		$case UNSIGNED_INT:
@@ -170,7 +170,7 @@ macro bool is_unsigned($Type) @const
 
 macro typeid flat_type($Type) @const
 {
-	$if $Type.kindof == DISTINCT || $Type.kindof == CONST_ENUM:
+	$if $Type.kindof == TYPEDEF || $Type.kindof == CONSTDEF:
 		return flat_type($Type.inner);
 	$else
 		return $Type.typeid;
@@ -179,7 +179,7 @@ macro typeid flat_type($Type) @const
 
 macro TypeKind flat_kind($Type) @const
 {
-	$if $Type.kindof == DISTINCT || $Type.kindof == CONST_ENUM:
+	$if $Type.kindof == TYPEDEF || $Type.kindof == CONSTDEF:
 		return flat_type($Type.inner);
 	$else
 		return $Type.kindof;
@@ -203,8 +203,8 @@ macro bool is_flat_intlike($Type) @const
 		$case UNSIGNED_INT:
 			return true;
 		$case VECTOR:
-		$case DISTINCT:
-		$case CONST_ENUM:
+		$case TYPEDEF:
+		$case CONSTDEF:
 			return is_flat_intlike($Type.inner);
 		$default:
 			return false;
@@ -230,7 +230,7 @@ macro bool is_underlying_int($Type) @const
 		$case SIGNED_INT:
 		$case UNSIGNED_INT:
 			return true;
-		$case DISTINCT:
+		$case TYPEDEF:
 			return is_underlying_int($Type.inner);
 		$default:
 			return false;
@@ -258,7 +258,7 @@ macro bool is_vector($Type) @const
 
 macro typeid inner_type($Type) @const
 {
-	$if $Type.kindof == DISTINCT || $Type.kindof == CONST_ENUM:
+	$if $Type.kindof == TYPEDEF || $Type.kindof == CONSTDEF:
 		return inner_type($Type.inner);
 	$else
 		return $Type.typeid;
@@ -298,7 +298,7 @@ macro bool may_load_atomic($Type) @const
 	$case POINTER:
 	$case FLOAT:
 		return true;
-	$case DISTINCT:
+	$case TYPEDEF:
 	$case ENUM:
 		return may_load_atomic($Type.inner);
 	$default:
@@ -313,8 +313,8 @@ macro lower_to_atomic_compatible_type($Type) @const
 		$case SIGNED_INT:
 		$case UNSIGNED_INT:
 	        return $Type.typeid;
-		$case DISTINCT:
-		$case CONST_ENUM:
+		$case TYPEDEF:
+		$case CONSTDEF:
 			return lower_to_atomic_compatible_type($Type.inner);
 		$case FLOAT:
 			$switch $Type:
@@ -379,6 +379,9 @@ macro bool @comparable_value(#value) @const
 	$endif
 }
 
+const CONST_ENUM @builtin @deprecated("Use TypeKind.CONSTDEF instead") = TypeKind.CONSTDEF;
+const DISTINCT @builtin @deprecated("Use TypeKind.TYPEDEF instead") = TypeKind.TYPEDEF;
+
 enum TypeKind : char
 {
 	VOID,
@@ -390,7 +393,7 @@ enum TypeKind : char
 	FAULT,
 	ANY,
 	ENUM,
-	CONST_ENUM,
+	CONSTDEF,
 	STRUCT,
 	UNION,
 	BITSTRUCT,
@@ -399,7 +402,7 @@ enum TypeKind : char
 	ARRAY,
 	SLICE,
 	VECTOR,
-	DISTINCT,
+	TYPEDEF,
 	POINTER,
 	INTERFACE,
 }

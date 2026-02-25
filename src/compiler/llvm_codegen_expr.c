@@ -3595,7 +3595,7 @@ static void llvm_emit_array_comp(GenContext *c, BEValue *result, BEValue *lhs, B
 		case ALL_INTS:
 		case TYPE_POINTER:
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 		case TYPE_FUNC_PTR:
 		case TYPE_INTERFACE:
 		case TYPE_ANY:

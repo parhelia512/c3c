@@ -1021,7 +1021,7 @@ bool sema_resolve_type_decl(SemaContext *context, Type *type)
 			if (!type->function.prototype && type->function.decl->decl_kind == DECL_FNTYPE) return sema_analyse_decl(context, type->function.decl);
 			return true;
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 		case TYPE_STRUCT:
 		case TYPE_UNION:
 		case TYPE_BITSTRUCT:
@@ -1067,7 +1067,7 @@ Decl *sema_resolve_type_method(SemaContext *context, CanonicalType *type, const 
 			type = type_decl->distinct->type->canonical;
 			goto RETRY;
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 			type = enum_inner_type(type)->canonical;
 			goto RETRY;
 		default:

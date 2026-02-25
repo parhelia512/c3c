@@ -656,7 +656,7 @@ static inline LLVMMetadataRef llvm_get_debug_type_internal(GenContext *c, Type *
 			return type->backend_debug_type = llvm_debug_pointer_type(c, type);
 		case TYPE_ENUM:
 			return type->backend_debug_type = llvm_debug_enum_type(c, type, scope);
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 			return type->backend_debug_type = llvm_debug_raw_enum_type(c, type, scope);
 		case TYPE_FUNC_RAW:
 			return type->backend_debug_type = llvm_debug_func_type(c, type);

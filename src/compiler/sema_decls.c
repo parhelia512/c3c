@@ -465,7 +465,7 @@ RETRY:;
 		case TYPE_SLICE:
 			return compiler.platform.align_pointer.align / 8;
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 			type = enum_inner_type(type);
 			goto RETRY;
 		case TYPE_STRUCT:
@@ -1061,7 +1061,7 @@ RETRY:
 		case TYPE_ANYFAULT:
 		case TYPE_TYPEID:
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 		case TYPE_STRUCT:
 		case TYPE_UNION:
 		case TYPE_BITSTRUCT:
@@ -2902,7 +2902,7 @@ static inline bool sema_analyse_method(SemaContext *context, Decl *decl)
 				goto NOT_VALID_NAME;
 			}
 			FALLTHROUGH;
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 		case TYPE_STRUCT:
 		case TYPE_UNION:
 		{
@@ -4663,7 +4663,7 @@ RETRY:
 		case TYPE_STRUCT:
 		case TYPE_UNION:
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 		case TYPE_SLICE:
 			size = i128_mult64(size, type_size(type));
 			break;
@@ -5644,7 +5644,7 @@ RETRY:
 			return true;
 		case TYPE_FUNC_RAW:
 		case TYPE_ENUM:
-		case TYPE_CONST_ENUM:
+		case TYPE_CONSTDEF:
 		case TYPE_STRUCT:
 		case TYPE_UNION:
 		case TYPE_BITSTRUCT:
