@@ -5356,9 +5356,9 @@ FOUND:;
 			if (decl->decl_kind != DECL_ERASED) vec_add(copied, decl);
 		}
 
-		if (stage < ANALYSIS_METHODS_REGISTER) goto EXIT;
 		FOREACH(Decl *, decl, copied)
 		{
+			if (decl->unit->module->stage < ANALYSIS_METHODS_REGISTER) continue;
 			if (decl->decl_kind != DECL_FUNC && decl->decl_kind != DECL_MACRO) continue;
 			if (!decl->func_decl.type_parent) continue;
 			SemaContext gen_context;
@@ -5376,9 +5376,9 @@ FOUND:;
 				}
 			}
 		}
-		if (stage < ANALYSIS_DECLS) goto EXIT;
 		FOREACH(Decl *, decl, copied)
 		{
+			if (decl->unit->module->stage < ANALYSIS_DECLS) continue;
 			SemaContext context_gen;
 			sema_context_init(&context_gen, decl->unit);
 			DynamicScope empty = { .depth = 0 };
@@ -5392,10 +5392,10 @@ FOUND:;
 			}
 			sema_context_destroy(&context_gen);
 		}
-		if (stage < ANALYSIS_FUNCTIONS) goto EXIT;
 		if (compiler.context.errors_found) return poisoned_decl;
 		FOREACH(Decl *, decl, copied)
 		{
+			if (decl->unit->module->stage < ANALYSIS_FUNCTIONS) continue;
 			SemaContext context_gen;
 			switch (decl->decl_kind)
 			{
@@ -5408,10 +5408,10 @@ FOUND:;
 					break;
 			}
 		}
-		if (stage < ANALYSIS_INTERFACE) goto EXIT;
 		if (compiler.context.errors_found) return poisoned_decl;
 		FOREACH(Decl *, decl, copied)
 		{
+			if (decl->unit->module->stage < ANALYSIS_INTERFACE) continue;
 			SemaContext context_gen;
 			switch (decl->decl_kind)
 			{
@@ -5431,7 +5431,6 @@ FOUND:;
 				sema_context_destroy(&context_gen);
 			}
 		}
-EXIT:;
 		if (compiler.context.errors_found) return poisoned_decl;
 	}
 	Decl *symbol = sema_find_generic_instance(context, module, generic, instance, alias->name);

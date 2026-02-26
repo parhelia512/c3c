@@ -3360,6 +3360,7 @@ bool sema_analyse_function_body(SemaContext *context, Decl *func)
 {
 	// Stop if it's already poisoned.
 	if (!decl_ok(func)) return false;
+	ASSERT_SPAN(func, func->resolve_status == RESOLVE_DONE);
 	if (func->is_body_checked) return true;
 	func->is_body_checked = true;
 	context->generic_instance = func->is_templated ? declptr(func->instance_id) : NULL;

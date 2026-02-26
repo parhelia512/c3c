@@ -62,6 +62,7 @@
 - Trying to slice an indexable type leads to misleading error message #2958
 - Warn on use of visibility modifiers on methods. #2962
 - Compiler crash using `??` with a `void?` macro #2973
+- Fix issue when extending a generic type with a method in another module.
 
 ## 0.7.9 Change list
 

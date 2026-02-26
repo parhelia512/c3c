@@ -11045,6 +11045,7 @@ static inline bool sema_expr_analyse_lambda(SemaContext *context, Type *target_t
 	}
 	else
 	{
+		decl->resolve_status = RESOLVE_DONE;
 		SemaContext lambda_context;
 		sema_context_init(&lambda_context, context->unit);
 		if (sema_analyse_function_body(&lambda_context, decl))
