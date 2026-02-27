@@ -1307,24 +1307,24 @@ static inline bool sema_expr_analyse_identifier(SemaContext *context, Type *to, 
 			switch (decl->decl_kind)
 			{
 				case DECL_VAR:
-					message = "Globals from other modules must be prefixed with the module name.";
+					message = "Globals";
 					break;
 				case DECL_FUNC:
-					message = "Functions from other modules must be prefixed with the module name.";
+					message = "Functions";
 					break;
 				case DECL_MACRO:
-					message = "Macros from other modules must be prefixed with the module name.";
+					message = "Macros";
 					break;
 				case DECL_ALIAS:
-					message = "Aliases from other modules must be prefixed with the module name.";
+					message = "Aliases";
 					break;
 				case DECL_FAULT:
-					message = "Faults from other modules must be prefixed with the module name.";
+					message = "Faults";
 					break;
 				default:
 					UNREACHABLE
 			}
-			RETURN_SEMA_ERROR(expr, message);
+			RETURN_SEMA_ERROR(expr, "%s from other modules must be prefixed with the module name, please use %s::%s instead.", message, decl->unit->module->short_path, decl->name);
 		}
 	}
 	if (decl_is_defaulted_var(decl))
